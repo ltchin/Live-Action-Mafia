@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>website here</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:300,100,400,700' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+</head>
+
+<script>
+
+	var mafiaRef = new Firebase('https://hackmit-mafia.firebaseio.com/');
+	var playerRef = new Firebase('https://hackmit-mafia.firebaseio.com/players');
+	var itemRef = new Firebase('https://hackmit-mafia.firebaseio.com/items');
+	
+	var fredRef = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred');
+	fredRef.set({name: 'Fred', role: 'Poopface', permissions: 'Mafia', itemList: 'https://hackmit-mafia.firebaseio.com/players/fred/items'});
+
+	var fredItemList = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred/itemList');
+	fredItemList.push(url: 'https://hackmit-mafia.firebaseio.com/items/shovel1');
+
+
+</script>
+
+<body>
+
+</body>
+</html>
+
