@@ -9,11 +9,21 @@
 <script>
 
 	var mafiaRef = new Firebase('https://hackmit-mafia.firebaseio.com/');
-	var itemRef = new Firebase('https://hackmit-mafia.firebaseio.com/players');
-	var itemRef = new Firebase('https://hackmit-mafia.firebaseio.com/items');
-	
+
 	var fredRef = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred');
-	fredRef.set({name: 'Fred', role: 'Poopface'});
+	fredRef.set({name: 'Fred', role: 'Poopface', permissions: "Mafia"});
+
+	var fredRefItems = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred/items');
+	fredRefItems.push({item_url: 'https://hackmit-mafia.firebaseio.com/items/shovel_a'});
+
+	var fredRefPMs = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred/pms');
+	fredRefPMs.push({name: 'Poopface', message: 'I\'m a poopface.'});
+
+	var shovelRef = new Firebase('https://hackmit-mafia.firebaseio.com/item-types/shovel');
+	shovelRef.set({code: 'Some code here?'});
+
+	var shovel_a = new Firebase('https://hackmit-mafia.firebaseio.com/items/shovel_a');
+	shovel_a.set({type_url: 'https://hackmit-mafia.firebaseio.com/item-types/shovel'});
 
 </script>
 
