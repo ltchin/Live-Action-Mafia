@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>website here</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:300,100,400,700' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+</head>
+
+<script>
+var mafiaRef = new Firebase('https://hackmit-mafia.firebaseio.com/');
+var auth = new FirebaseSimpleLogin(mafiaRef, function(error, user) {
+  if (error) {
+    // an error occurred while attempting login
+    alert(error);
+  } else if (user) {
+    // user authenticated with Firebase
+    // Display UserID and user email:
+    alert('User ID: ' + user.id + ', Email: ' + user.email);
+  } else {
+    // user is logged out
+  }
+});
+
+//Create new account with specified email and password:
+auth.createUser('abergal@mit.edu', 'Poopface', function(error, user) {
+  if (!error) {
+    console.log('User Id: ' + user.id + ', Email: ' + user.email);
+  }
+});
+
+//Login with your email and password
+auth.login('password', {
+  email: 'abergal@mit.edu',
+  password: 'Poopface'
+});
+
+alert(" even more stuff!");
+
+
+</script>
+
+<body>
+Look at things work!
+</body>
+</html>
+
