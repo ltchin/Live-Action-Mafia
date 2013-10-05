@@ -9,15 +9,11 @@
 <script>
 
 	var mafiaRef = new Firebase('https://hackmit-mafia.firebaseio.com/');
-	var playerRef = new Firebase('https://hackmit-mafia.firebaseio.com/players');
+	var itemRef = new Firebase('https://hackmit-mafia.firebaseio.com/players');
 	var itemRef = new Firebase('https://hackmit-mafia.firebaseio.com/items');
 	
 	var fredRef = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred');
-	fredRef.set({name: 'Fred', role: 'Poopface', permissions: 'Mafia', itemList: 'https://hackmit-mafia.firebaseio.com/players/fred/items'});
-
-	var fredItemList = new Firebase('https://hackmit-mafia.firebaseio.com/players/fred/itemList');
-	fredItemList.push(url: 'https://hackmit-mafia.firebaseio.com/items/shovel1');
-
+	fredRef.set({name: 'Fred', role: 'Poopface'});
 
 </script>
 
