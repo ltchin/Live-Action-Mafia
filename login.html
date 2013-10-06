@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="myapp">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+		<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<title>Login</title>
+  </head>
+  <body ng-controller="LoginCtrl">
+		<section id="login" ng-hide="user">
+			<header id="header">
+				<h1>Login</h1>
+			</header>
+			<input type="text" ng-model="email" placeholder="Email">
+			<input type="password" ng-model="password" placeholder="Password">
+			<button ng-click="login()">Login!</button>
+		</section>
+		<section id="main" ng-show="user">
+			<header id="items">
+				<h1>Items</h1>
+			</header>
+			<div>Hi, {{user.email}}</div>
+			<ul id="item-list">
+				<li ng-repeat="item in model.items">
+					{{item}}
+				</li>
+			</ul>
+		</section>
+    <script>
+      var app = angular.module("myapp", ["firebase"]);
+      function LoginCtrl($scope, angularFire, angularFireAuth) {
+				var ref = new Firebase('https://hackmit-mafia.firebaseio.com/');
+				$scope.model = {};
+        angularFire(ref, $scope, "model");
+				angularFireAuth.initialize(ref, {scope: $scope, name: "user"});
+        $scope.login = function() {
+					angularFireAuth.login('password', { email: $scope.email, password: $scope.password, rememberMe: true });
+        }
+      }
+    </script>
+  </body>
+</html>
