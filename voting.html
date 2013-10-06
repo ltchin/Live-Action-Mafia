@@ -1,0 +1,66 @@
+<html>
+<head>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+</head>
+
+<script>
+var mafiaRef = new Firebase('https://hackmit-mafia.firebaseio.com/');
+var auth = new FirebaseSimpleLogin(mafiaRef, function(error, user) {
+  if (error) {
+    // an error occurred while attempting login
+    alert(error);
+  } 
+  else if (user) {
+    // Assuming user is logged in
+  var day = ""; //Variable that stores the current day in the mafia game.
+  
+  //Get the current day and store in day.
+   var dayRef = mafiaRef.child('day');
+
+   dayRef.on('value', function(snapshot) {
+    day = snapshot.val();
+
+    //Replace .s in user email with _s and find the corresponding username
+   var sanitized_email = user.email.replace(".", "_");
+   var playerUsernameRef = new Firebase('https://hackmit-mafia.firebaseio.com/EmailToPlayer/' + sanitized_email + '/user');
+
+   alert('User ID: ' + user.id + ', Email: ' + sanitized_email);
+
+    var username = ""; //Player's username
+
+    //Get player's username and store in username
+    playerUsernameRef.on('value', function(snapshot) {
+      username = snapshot.val();
+
+    //Get pollRef object for the current day
+    var pollRef = new Firebase('https://hackmit-mafia.firebaseio.com/Votes/Day' + day + '/');
+
+    //Get your vote and store it in the vote history
+    var your_vote = "Lilly"; //TODO: replace with the function to get your vote from the UI
+    var voteHistoryRef = pollRef.child(username);
+    voteHistoryRef.set({victim: your_vote});
+    });
+
+   });
+
+  } 
+  else {
+    // TODO: Insert code to redirect to login functionality
+    // user is logged out
+  }
+});
+
+// auth.login('password', {
+// email: 'abergal@mit.edu',
+// password: 'Poopface' });
+
+
+</script>
+
+<body>
+Look at things work!
+</body>
+</html>
+
