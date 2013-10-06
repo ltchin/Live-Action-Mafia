@@ -2,3 +2,19 @@
 <div class="test">Hi, {{user.email}}</div>
 <input type="button" value="Log out" ng-click="logout()">
 </section>
+<section>
+<section id="currentPoll">
+<h3>Day {{model.day}} Lynch Poll:</h3>
+	<p>What is your lynch vote for today?</p>
+	<form id="pollForm">
+		<div class="form-part" ng-repeat="(playerId, player) in model.players">
+			<input type="radio" name="pollChoice" ng-model="model.lynchVotes[model.day][user.id]" ng-show="player.username" value="{{playerId}}" id="poll_{{playerId}}">
+			<label for="poll_{{playerId}}">{{player.username}}</label>
+		</div>
+		<div class="form-part">
+			<input type="radio" name="pollChoice" ng-model="model.lynchVotes[model.day][user.id]" value="-1" id="poll_nolynch">
+			<label for="poll_nolynch"><i>No Lynch</i></label>
+		</div>
+	</form>
+</div>
+</section>
